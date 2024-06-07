@@ -1,0 +1,17 @@
+openapi: 3.0.0
+info:
+  title: Hello World API
+  description: An API that prints "Hello, World!"
+  version: 1.0.0
+paths:
+  /hello:
+    get:
+      summary: Returns a greeting message
+      responses:
+        '200':
+          description: A successful response
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Hello, World!
