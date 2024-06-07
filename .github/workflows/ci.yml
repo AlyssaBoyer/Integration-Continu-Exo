@@ -74,7 +74,10 @@ jobs:
 
       - name: Send notification to Microsoft Teams
         if: always()
-        run: curl -H 'Content-Type: application/json' -d '{"text": "Build and deployment completed successfully."}' ${{ secrets.TEAMS_WEBHOOK_URL }}
+        env:
+          TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
+        run: |
+          curl -H 'Content-Type: application/json' -d '{"text": "Build and deployment completed successfully."}' $TEAMS_WEBHOOK_URL
 
       - name: Send notification to Discord
         if: always()
