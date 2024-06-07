@@ -1,83 +1,79 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>Alyssa</groupId>
-  <artifactId>Alyssa</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <name>IntegrationExo</name>
-  <properties>
-    <maven.compiler.source>11</maven.compiler.source>
-    <maven.compiler.target>11</maven.compiler.target>
-  </properties>
-  <dependencies>
-    <!-- OkHttp -->
-    <dependency>
-      <groupId>com.squareup.okhttp3</groupId>
-      <artifactId>okhttp</artifactId>
-      <version>4.9.0</version>
-    </dependency>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-    <!-- Gson -->
-    <dependency>
-      <groupId>com.google.code.gson</groupId>
-      <artifactId>gson</artifactId>
-      <version>2.8.8</version>
-    </dependency>
+    <!-- Other configurations and dependencies -->
 
-    <!-- ThreeTenBP -->
-    <dependency>
-      <groupId>org.threeten</groupId>
-      <artifactId>threetenbp</artifactId>
-      <version>1.5.1</version>
-    </dependency>
+    <build>
+        <plugins>
+            <!-- Swagger Maven Plugin -->
+            <plugin>
+                <groupId>com.github.kongchen</groupId>
+                <artifactId>swagger-maven-plugin</artifactId>
+                <version>3.1.8</version>
+                <configuration>
+                    <apiSources>
+                        <apiSource>
+                            <springmvc>false</springmvc>
+                            <locations>
+                                <location>io.swagger.client.api</location> <!-- Package containing your API classes -->
+                            </locations>
+                            <basePath>/api</basePath> <!-- Base path of your API -->
+                            <outputFormats>JSON, YAML</outputFormats>
+                            <swaggerDirectory>${project.build.directory}/swagger</swaggerDirectory> <!-- Output directory for generated Swagger files -->
+                        </apiSource>
+                    </apiSources>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
 
-    <!-- Swagger Codegen Maven Plugin -->
-    <dependency>
-      <groupId>io.swagger.codegen.v3</groupId>
-      <artifactId>swagger-codegen-maven-plugin</artifactId>
-      <version>3.0.26</version>
-    </dependency>
-  </dependencies>
-  <build>
-    <plugins>
-      <!-- Maven Compiler Plugin -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.8.1</version>
-      </plugin>
+            <!-- Add OkHttp dependencies -->
+            <plugin>
+                <groupId>com.squareup.okhttp</groupId>
+                <artifactId>okhttp</artifactId>
+                <version><!-- Choose the appropriate version --></version>
+            </plugin>
+            <plugin>
+                <groupId>com.squareup.okhttp</groupId>
+                <artifactId>logging-interceptor</artifactId>
+                <version><!-- Choose the appropriate version --></version>
+            </plugin>
 
-      <!-- Maven Jar Plugin -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jar-plugin</artifactId>
-        <version>3.1.0</version>
-        <configuration>
-          <archive>
-            <manifest>
-              <mainClass>Main</mainClass>
-            </manifest>
-          </archive>
-        </configuration>
-      </plugin>
+            <!-- Add GsonFire dependency -->
+            <plugin>
+                <groupId>io.gsonfire</groupId>
+                <artifactId>gson-fire</artifactId>
+                <version><!-- Choose the appropriate version --></version>
+            </plugin>
+        </plugins>
+    </build>
 
-      <!-- Swagger Codegen Maven Plugin -->
-      <plugin>
-        <groupId>io.swagger.codegen.v3</groupId>
-        <artifactId>swagger-codegen-maven-plugin</artifactId>
-        <version>3.0.26</version>
-        <executions>
-          <execution>
-            <goals>
-              <goal>generate</goal>
-            </goals>
-            <configuration>
-              <inputSpec>src/main/resources/swagger.yaml</inputSpec>
-              <language>java</language>
-              <output>generated-sources/swagger</output>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
+    <dependencies>
+        <!-- OkHttp dependencies -->
+        <dependency>
+            <groupId>com.squareup.okhttp</groupId>
+            <artifactId>okhttp</artifactId>
+            <version><!-- Choose the appropriate version --></version>
+        </dependency>
+        <dependency>
+            <groupId>com.squareup.okhttp</groupId>
+            <artifactId>logging-interceptor</artifactId>
+            <version><!-- Choose the appropriate version --></version>
+        </dependency>
+
+        <!-- GsonFire dependency -->
+        <dependency>
+            <groupId>io.gsonfire</groupId>
+            <artifactId>gson-fire</artifactId>
+            <version><!-- Choose the appropriate version --></version>
+        </dependency>
+    </dependencies>
+
+    <!-- Other configurations and dependencies -->
 </project>
