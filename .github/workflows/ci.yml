@@ -81,4 +81,5 @@ jobs:
 
       - name: Send notification to Discord
         if: always()
-        run: curl -H 'Content-Type: application/json' -d '{"content": "Build and deployment completed successfully."}' ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: |
+          curl -H 'Content-Type: application/json' -d '{"content": "Build and deployment completed successfully."}' ${{ secrets.DISCORD_WEBHOOK_URL }}
